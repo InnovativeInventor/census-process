@@ -6,38 +6,39 @@ import os
 import glob
 import typer
 
+
 def main(state_str: str, level: str = "block"):
     state = us.states.lookup(state_str)
-    base = f"zip:///media/max/cabinet/census/ftp.census.gov/geo/tiger/TIGER2020PL/STATE/{state.fips}_{state.name.upper().replace(' ', '_')}/{state.fips}/"
+    BASE = f"zip:///media/max/cabinet/census/ftp.census.gov/geo/tiger/TIGER2020PL/STATE/{state.fips}_{state.name.upper().replace(' ', '_')}/{state.fips}/"
     if level == "block":
-        census_path = base + f"tl_2020_{state.fips}_tabblock20.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_tabblock20.zip"
         sumlev = 750
     elif level == "bg":
-        census_path = base + f"tl_2020_{state.fips}_bg20.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_bg20.zip"
         sumlev = 150
     elif level == "vtd":
-        census_path = base + f"tl_2020_{state.fips}_vtd20.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_vtd20.zip"
         sumlev = 700
     elif level == "tract":
-        census_path = base + f"tl_2020_{state.fips}_tract20.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_tract20.zip"
         sumlev = 140
     elif level == "county":
-        census_path = base + f"tl_2020_{state.fips}_county20.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_county20.zip"
         sumlev = 50
     elif level == "place":
-        census_path = base + f"tl_2020_{state.fips}_place20.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_place20.zip"
         sumlev = 160
     elif level == "cousub":
-        census_path = base + f"tl_2020_{state.fips}_cousub20.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_cousub20.zip"
         sumlev = 60
     elif level == "sldu":
-        census_path = base + f"tl_2020_{state.fips}_sldu20.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_sldu20.zip"
         sumlev = 610
     elif level == "sldl":
-        census_path = base + f"tl_2020_{state.fips}_sldl20.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_sldl20.zip"
         sumlev = 620
     elif level == "cd116":
-        census_path = base + f"tl_2020_{state.fips}_cd116.zip"
+        census_path = BASE + f"tl_2020_{state.fips}_cd116.zip"
         sumlev = 500
     else:
         raise ValueError
