@@ -93,7 +93,6 @@ def main(state_str: str, level: str = "block"):
         joined[key] = 0
         cols.append(key)
         for col in values:
-            print(col, key)
             joined[key] += joined[col]
 
     # add geographic info
