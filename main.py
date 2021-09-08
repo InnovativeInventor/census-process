@@ -5,7 +5,11 @@ import us
 import os
 import glob
 import typer
+import yaml
 
+with open("composite.yaml") as f:
+    composite = yaml.load(f)
+    print(composite)
 
 def main(state_str: str, level: str = "block"):
     state = us.states.lookup(state_str)
@@ -75,18 +79,22 @@ def main(state_str: str, level: str = "block"):
     joined = f1.merge(f2, on='LOGRECNO')
 
     # get columns we want
-    wanted_cols = pd.read_excel('col_map.xlsx')
+    wanted_cols = pd.read_csv('col_map.csv')
     cols = list(wanted_cols['Census'])
     cols.append('LOGRECNO')
-
-    # subset to what we want
-    joined = joined[cols]
 
     # map census names to mggg names
     mapper = {
         c: "LOGRECNO" if c == "LOGRECNO" else wanted_cols[wanted_cols['Census'] == c].iloc[0]['MGGG'] for c in cols
     }
     joined = joined.rename(mapper = mapper, axis = 1)
+
+    for key, values in composite.items():
+        joined[key] = 0
+        cols.append(key)
+        for col in values:
+            print(col, key)
+            joined[key] += joined[col]
 
     # add geographic info
     with_geo = joined.merge(geo[['LOGRECNO', 'GEOCODE', 'SUMLEV']], on = 'LOGRECNO')
@@ -100,6 +108,8 @@ def main(state_str: str, level: str = "block"):
         os.makedirs(f"final/{state.abbr.lower()}")
 
     final = census_shp.merge(with_geo, left_on='GEOID20', right_on='GEOCODE')
+    final = gpd.GeoDataFrame(final[set(["geometry"])|set([x for x in final.columns if not x.startswith("P") and not x.startswith("H00") and not x.endswith("_y")])])
+    final = final.rename(mapper={k:k.replace("_x", "") for k in final.columns if k.endswith("_x")}, axis=1)
     final.to_file(f"final/{state.abbr.lower()}/{state.abbr.lower()}_{level}.shp")
     final_len = len(final)
     print(orig_len, final_len)
