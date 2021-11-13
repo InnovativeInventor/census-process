@@ -8,8 +8,8 @@ import typer
 import yaml
 
 with open("composite.yaml") as f:
-    composite = yaml.load(f)
-    print(composite)
+    composite = yaml.safe_load(f)
+    # print(composite)
 
 def main(state_str: str, level: str = "block"):
     state = us.states.lookup(state_str)
@@ -73,7 +73,7 @@ def main(state_str: str, level: str = "block"):
     # do not need the third file, read the others
     f1 = pd.read_csv(f1path, names = f1headers, delimiter = '|')
     f2 = pd.read_csv(f2path, names = f2headers, delimiter = '|')
-    geo = pd.read_csv(geopath, names = geoheaders, delimiter = '|', low_memory=False)
+    geo = pd.read_csv(geopath, names = geoheaders, delimiter = '|', low_memory=False, encoding = "ISO-8859-1")
 
     # join f1 to f2
     joined = f1.merge(f2, on='LOGRECNO')
