@@ -87,7 +87,7 @@ def main(state_str: str, level: str = "block"):
     mapper = {
         c: "LOGRECNO" if c == "LOGRECNO" else wanted_cols[wanted_cols['Census'] == c].iloc[0]['MGGG'] for c in cols
     }
-    joined = joined.rename(mapper = mapper, axis = 1)
+    joined[wanted_cols["MGGG"]] = joined.rename(mapper = mapper, axis = 1)[wanted_cols["MGGG"]]
 
     for key, values in composite.items():
         joined[key] = 0
