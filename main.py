@@ -9,11 +9,10 @@ import yaml
 
 with open("composite.yaml") as f:
     composite = yaml.safe_load(f)
-    # print(composite)
 
-def main(state_str: str, level: str = "block"):
+def main(state_str: str, level: str = "block", ftp_location: str = "/media/max/cabinet/census/ftp.census.gov"):
     state = us.states.lookup(state_str)
-    BASE = f"zip:///media/max/cabinet/census/ftp.census.gov/geo/tiger/TIGER2020PL/STATE/{state.fips}_{state.name.upper().replace(' ', '_')}/{state.fips}/"
+    BASE = f"zip://{ftp_location}/geo/tiger/TIGER2020PL/STATE/{state.fips}_{state.name.upper().replace(' ', '_')}/{state.fips}/"
     if level == "block":
         census_path = BASE + f"tl_2020_{state.fips}_tabblock20.zip"
         sumlev = 750
