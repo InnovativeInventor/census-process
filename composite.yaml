@@ -235,3 +235,69 @@ NWBHVAP20:
   - P0040047
   - P0040048
   - P0040064
+
+DOJBVAP20:
+  - name: P0040006
+    weight: 1.0
+  - name: P0040013
+    weight: 1.0
+  - name: P0040018
+    weight: 0.5
+  - name: P0040019
+    weight: 0.5
+  - name: P0040020
+    weight: 0.5
+  - name: P0040021
+    weight: 0.5
+  - name: P0040029
+    weight: 0.3333333333333333
+  - name: P0040030
+    weight: 0.3333333333333333
+  - name: P0040031
+    weight: 0.3333333333333333
+  - name: P0040032
+    weight: 0.3333333333333333
+  - name: P0040039
+    weight: 0.3333333333333333
+  - name: P0040040
+    weight: 0.3333333333333333
+  - name: P0040041
+    weight: 0.3333333333333333
+  - name: P0040042
+    weight: 0.3333333333333333
+  - name: P0040043
+    weight: 0.3333333333333333
+  - name: P0040044
+    weight: 0.3333333333333333
+  - name: P0040050
+    weight: 0.25
+  - name: P0040051
+    weight: 0.25
+  - name: P0040052
+    weight: 0.25
+  - name: P0040053
+    weight: 0.25
+  - name: P0040054
+    weight: 0.25
+  - name: P0040055
+    weight: 0.25
+  - name: P0040060
+    weight: 0.25
+  - name: P0040061
+    weight: 0.25
+  - name: P0040062
+    weight: 0.25
+  - name: P0040063
+    weight: 0.25
+  - name: P0040066
+    weight: 0.2
+  - name: P0040067
+    weight: 0.2
+  - name: P0040068
+    weight: 0.2
+  - name: P0040069
+    weight: 0.2
+  - name: P0040071
+    weight: 0.2
+  - name: P0040073
+    weight: 0.16666666666666666

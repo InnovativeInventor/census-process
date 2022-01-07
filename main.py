@@ -92,7 +92,10 @@ def main(state_str: str, level: str = "block", ftp_location: str = "/media/max/c
         joined[key] = 0
         cols.append(key)
         for col in values:
-            joined[key] += joined[col]
+            if isinstance(col, dict):
+                joined[key] += joined[col["name"]] * col["weight"]
+            else:
+                joined[key] += joined[col]
 
     # add geographic info
     with_geo = joined.merge(geo[['LOGRECNO', 'GEOCODE', 'SUMLEV']], on = 'LOGRECNO')
